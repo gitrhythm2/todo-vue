@@ -1,5 +1,18 @@
 <template>
   <div class="about">
-    <h1>This is an about page</h1>
+    <h1>Todoリスト デモ</h1>
+    <p>Vue学習のために作成した、サンプルプログラムです。</p>
+    <p>Author: 細川 弘幸</p>
+    <p>フロントエンジニア見習い</p>
+    <div>
+      <span>リポジトリ: </span><a href="https://github.com/gitrhythm2/todo-vue">gitrhythm2/todo-vue</a>
+    </div>
+    <div>アカウント</div>
+    <div>
+      <span>GitHub: </span><a href="https://github.com/gitrhythm2">GitHub: gitrhytym2</a>
+    </div>
+    <div>
+      <span>Twitter: </span><a href="https://twitter.com/gitrhythm">@gitrhythm</a>
+    </div>
   </div>
 </template>
