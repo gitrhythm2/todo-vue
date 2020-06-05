@@ -1,7 +1,9 @@
 
+import Storage from '@/logics/Storage'
 import { Todo } from '@/types/Todo'
 
 export default class TodoModel {
+  private storage: Storage
   private todos: Todo[]
 
   options = [
@@ -10,23 +12,13 @@ export default class TodoModel {
     { state: 1, label: '完了' }
   ]
 
-  constructor () {
-    this.todos = [
-      {
-        id: 1,
-        title: 'task1',
-        state: 0
-      },
-      {
-        id: 2,
-        title: 'task2',
-        state: 1
-      }
-    ]
+  constructor (storage: Storage) {
+    this.storage = storage
+    this.todos = this.storage.fetch()
   }
 
   findList (condition: number): Todo[] {
-    // condition = -1は全てが対象
+    // condition = -1は全てのTODOが対象
     return this.todos.filter(todo => {
       return (condition === -1) ? todo : todo.state === condition
     })
@@ -38,19 +30,18 @@ export default class TodoModel {
       return
     }
 
-    const max = this.todos.reduce((result, todo) => {
-      return result.id > todo.id ? result : todo
-    })
-
     this.todos.push({
-      id: max.id + 1,
+      id: this.storage.nextId++,
       title: trimedTitle,
       state: 0
     })
+
+    this.storage.save(this.todos)
   }
 
   changeState (todo: Todo): void {
     todo.state = (todo.state === 0) ? 1 : 0
+    this.storage.save(this.todos)
   }
 
   remove (todo: Todo): void {
@@ -60,5 +51,6 @@ export default class TodoModel {
     }
 
     this.todos.splice(index, 1)
+    this.storage.save(this.todos)
   }
 }
