@@ -25,8 +25,11 @@ export default class TodoModel {
     ]
   }
 
-  findList (): Todo[] {
-    return this.todos
+  findList (condition: number): Todo[] {
+    // condition = -1は全てが対象
+    return this.todos.filter(todo => {
+      return (condition === -1) ? todo : todo.state === condition
+    })
   }
 
   add (title: string): void {

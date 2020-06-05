@@ -33,6 +33,9 @@ export default class TodoList extends Vue {
   @Prop({ type: Object, required: true })
   todoModel!: TodoModel
 
+  @Prop({ type: Number, required: true })
+  condition!: number
+
   get labels (): { [key: number]: string } {
     return this.todoModel.options.reduce((result, opt) => {
       return Object.assign(result, { [opt.state]: opt.label })
@@ -40,7 +43,7 @@ export default class TodoList extends Vue {
   }
 
   get todos (): Todo[] {
-    return this.todoModel.findList()
+    return this.todoModel.findList(this.condition)
   }
 
   onChangeState (todo: Todo): void {
