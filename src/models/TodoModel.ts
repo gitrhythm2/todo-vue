@@ -29,6 +29,23 @@ export default class TodoModel {
     return this.todos
   }
 
+  add (title: string): void {
+    const trimedTitle = title.trim()
+    if (trimedTitle === '') {
+      return
+    }
+
+    const max = this.todos.reduce((result, todo) => {
+      return result.id > todo.id ? result : todo
+    })
+
+    this.todos.push({
+      id: max.id + 1,
+      title: trimedTitle,
+      state: 0
+    })
+  }
+
   changeState (todo: Todo): void {
     todo.state = (todo.state === 0) ? 1 : 0
   }

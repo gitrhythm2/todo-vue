@@ -4,6 +4,9 @@
     <todo-list
       :todoModel="todoModel">
     </todo-list>
+    <new-todo
+      :todoModel="todoModel">
+    </new-todo>
   </div>
 </template>
 
@@ -11,10 +14,12 @@
 import { Component, Vue } from 'vue-property-decorator'
 import TodoModel from '@/models/TodoModel'
 import TodoList from '@/components/TodoList.vue'
+import NewTodo from '@/components/NewTodo.vue'
 
 @Component({
   components: {
-    TodoList
+    TodoList,
+    NewTodo
   }
 })
 export default class TodoView extends Vue {
