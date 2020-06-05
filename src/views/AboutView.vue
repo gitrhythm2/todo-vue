@@ -1,5 +1,6 @@
 <template>
   <div class="about">
+    <p>最終更新日: 2020/06/05</p>
     <h1>Todoリスト デモ</h1>
     <p>Vue学習のために作成したサンプルプログラムです。</p>
     <p>Author: 細川 弘幸</p>
