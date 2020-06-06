@@ -20,7 +20,7 @@ export default class TodoModel {
   findList (condition: number): Todo[] {
     // condition = -1は全てのTODOが対象
     return this.todos.filter(todo => {
-      return (condition === -1) ? todo : todo.state === condition
+      return (condition === -1) ? true : todo.state === condition
     })
   }
 
@@ -40,14 +40,19 @@ export default class TodoModel {
   }
 
   changeState (todo: Todo): void {
-    todo.state = (todo.state === 0) ? 1 : 0
+    const index = this.todos.indexOf(todo)
+    if (index === -1) {
+      throw new Error('TodoModel:changeState todo not found.')
+    }
+
+    this.todos[index].state = (this.todos[index].state === 0) ? 1 : 0
     this.storage.save(this.todos)
   }
 
   remove (todo: Todo): void {
     const index = this.todos.indexOf(todo)
     if (index === -1) {
-      return
+      throw new Error('TodoModel:remove todo not found.')
     }
 
     this.todos.splice(index, 1)

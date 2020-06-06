@@ -6,7 +6,7 @@ export default class Storage {
   nextId: number
 
   constructor () {
-    this.key = 'gitrhytym-todo-demo'
+    this.key = 'gitrhytym-todo-vue'
     this.nextId = 0
   }
 
@@ -24,5 +24,9 @@ export default class Storage {
 
   save (todos: Todo[]): void {
     localStorage.setItem(this.key, JSON.stringify(todos))
+  }
+
+  clear (): void {
+    localStorage.setItem(this.key, '[]')
   }
 }
