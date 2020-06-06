@@ -1,19 +1,31 @@
 <template>
-  <div class="about">
-    <p>最終更新日: 2020/06/05</p>
-    <h1>Todoリスト デモ</h1>
-    <p>Vue学習のために作成したサンプルプログラムです。</p>
-    <p>Author: 細川 弘幸</p>
-    <p>フロントエンジニア見習い</p>
-    <div>
-      <span>リポジトリ: </span><a href="https://github.com/gitrhythm2/todo-vue">gitrhythm2/todo-vue</a>
-    </div>
-    <div>アカウント</div>
-    <div>
-      <span>GitHub: </span><a href="https://github.com/gitrhythm2">GitHub: gitrhytym2</a>
-    </div>
-    <div>
-      <span>Twitter: </span><a href="https://twitter.com/gitrhythm">@gitrhythm</a>
-    </div>
+  <div class="container about">
+    <p class="text-right"><span class="timestamp">最終更新日: 2020/06/06</span></p>
+    <p>
+      todo-vueはVueの学習のために作成したサンプルプログラムです。 <br>
+      リポジトリ・アカウント情報は以下になります。
+    </p>
+    <dl>
+      <dt>リポジトリ</dt>
+      <dd><a href="https://github.com/gitrhythm2/todo-vue">gitrhythm2/todo-vue</a></dd>
+    </dl>
+    <dl>
+      <dt>アカウント</dt>
+      <dd>GitHub: <a href="https://github.com/gitrhythm2">https://github.com/gitrhythm2</a></dd>
+      <dd>Twitter: <a href="https://twitter.com/gitrhythm">@gitrhythm</a></dd>
+      <dd></dd>
+    </dl>
   </div>
 </template>
+
+<style scoped lang="scss">
+.timestamp {
+  font-size: 90%;
+}
+dl {
+  margin-bottom: 1.5rem;
+}
+dd {
+  margin-bottom: 0rem;
+}
+</style>

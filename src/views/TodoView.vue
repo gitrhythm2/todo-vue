@@ -43,11 +43,15 @@ export default class TodoView extends Vue {
 </script>
 
 <style scoped lang="scss">
+h1 {
+  color: #888;
+  text-shadow: 1px 1px 3px #ccc;
+}
 .condition-section {
   margin-top: 2rem;
 }
 .list-section {
-  margin-top: 1rem;
+  margin-top: 0rem;
 }
 .new-todo-section {
   margin-top: 2rem;
