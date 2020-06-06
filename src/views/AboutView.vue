@@ -7,11 +7,11 @@
     </p>
     <dl>
       <dt>リポジトリ</dt>
-      <dd><a href="https://github.com/gitrhythm2/todo-vue">gitrhythm2/todo-vue</a></dd>
+      <dd><a href="https://github.com/gitrhythm2/todo-vue">https://github.com/gitrhythm2/todo-vue</a></dd>
     </dl>
     <dl>
       <dt>アカウント</dt>
-      <dd>GitHub: <a href="https://github.com/gitrhythm2">https://github.com/gitrhythm2</a></dd>
+      <dd>GitHub: <a href="https://github.com/gitrhythm2">gitrhythm2</a></dd>
       <dd>Twitter: <a href="https://twitter.com/gitrhythm">@gitrhythm</a></dd>
       <dd></dd>
     </dl>
