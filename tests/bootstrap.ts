@@ -4,15 +4,15 @@ const localStorageMock = (() => {
   let store: any = {}
 
   return {
-    getItem(key: any) {
+    getItem (key: any) {
       return store[key] || null
     },
 
-    setItem(key: any, value: any) {
+    setItem (key: any, value: any) {
       store[key] = value.toString()
     },
 
-    removeItem(key: any) {
+    removeItem (key: any) {
       delete store[key]
     },
 

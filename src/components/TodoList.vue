@@ -1,22 +1,29 @@
 <template>
   <div>
-    <table border="1" align="center">
-      <thead>
+    <table class="table table-sm table-hover">
+      <thead class="thead-light">
         <tr>
-          <th>ID</th>
+          <th class="cell-id">ID</th>
           <th>タスク</th>
-          <th>状態</th>
-          <th>-</th>
+          <th class="cell-state">状態</th>
+          <th class="cell-remove">-</th>
         </tr>
       </thead>
       <tbody>
         <tr v-for="todo in todos" :key="todo.id">
           <td>{{ todo.id }}</td>
           <td>{{ todo.title }}</td>
-          <td><a href="#" @click="onChangeState(todo)">
-            {{ labels[todo.state] }}
-          </a></td>
-          <td><a href="#" @click="onTaskRemove(todo)">削除</a></td>
+          <td class="cell-state">
+            <a href="#" class="badge badge-pill badge-primary"
+              @click="onChangeState(todo)">
+              {{ labels[todo.state] }}
+            </a>
+          </td>
+          <td class="cell-remove">
+            <a href="#" class="badge badge-pilll badge-primary"
+              @click="onTodoRemove(todo)">削除
+            </a>
+          </td>
         </tr>
       </tbody>
     </table>
@@ -50,8 +57,22 @@ export default class TodoList extends Vue {
     this.todoModel.changeState(todo)
   }
 
-  onTaskRemove (todo: Todo): void {
+  onTodoRemove (todo: Todo): void {
     this.todoModel.remove(todo)
   }
 }
 </script>
+
+<style scoped lang="scss">
+table .cell-id {
+  width: 2.5rem;
+}
+table .cell-state {
+  text-align: center;
+  width: 5rem;
+}
+table .cell-remove {
+  text-align: center;
+  width: 3rem;
+}
+</style>

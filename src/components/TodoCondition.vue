@@ -4,7 +4,7 @@
       <input type="radio" v-model="condition" :value="opt.state">
       {{ opt.label}}
     </label>
-    ({{ todoCount }}件を表示)
+    <span class="count">({{ todoCount }}件を表示)</span>
   </div>
 </template>
 
@@ -21,7 +21,6 @@ export default class TodoCondition extends Vue {
 
   @Watch('condition')
   conditionChange (newValue: number) {
-    console.log('Emit conditionChange newvalue[' + newValue + ']')
     this.$emit('change', newValue)
   }
 
@@ -30,3 +29,12 @@ export default class TodoCondition extends Vue {
   }
 }
 </script>
+
+<style scoped lang="scss">
+label {
+  margin-right: 1rem;
+}
+.count {
+  margin-left: -0.5rem;
+}
+</style>

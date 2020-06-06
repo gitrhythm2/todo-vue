@@ -10,7 +10,7 @@ describe('TodoModel', () => {
     { id: 1, title: 'todo2', state: 0 }
   ]
 
-  it ('空のタイトルを追加しようとしてもできないこと', () => {
+  it('空のタイトルを追加しようとしてもできないこと', () => {
     storage.clear()
     const todoModel = new TodoModel(storage)
 
@@ -19,7 +19,7 @@ describe('TodoModel', () => {
     expect(result).toEqual([])
   })
 
-  it ('1件追加できること', () => {
+  it('1件追加できること', () => {
     storage.clear()
     const todoModel = new TodoModel(storage)
 
@@ -29,7 +29,7 @@ describe('TodoModel', () => {
     expect(result).toEqual([testData[0]])
   })
 
-  it ('2件目を追加できること', () => {
+  it('2件目を追加できること', () => {
     storage.clear()
     const todoModel = new TodoModel(storage)
 
@@ -41,7 +41,7 @@ describe('TodoModel', () => {
     expect(result).toEqual(testData)
   })
 
-  it ('todoを削除できること', () => {
+  it('todoを削除できること', () => {
     storage.clear()
     const todoModel = new TodoModel(storage)
 
@@ -60,7 +60,7 @@ describe('TodoModel', () => {
     expect(result).toEqual([])
   })
 
-  it ('状態を変更できること AND 条件を指定してTodoを抽出できること', () => {
+  it('状態を変更できること AND 条件を指定してTodoを抽出できること', () => {
     storage.clear()
     const todoModel = new TodoModel(storage)
 

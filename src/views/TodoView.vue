@@ -1,17 +1,17 @@
 <template>
-  <div>
-    <h1>Todoリスト</h1>
-    <todo-condition
+  <div class="container">
+    <h1 class="text-center">Todoリスト</h1>
+    <todo-condition class="condition-section"
       :todoModel="todoModel"
       @change="onChangeState">
     </todo-condition>
 
-    <todo-list
+    <todo-list class="list-section"
       :todoModel="todoModel"
       :condition="condition">
     </todo-list>
 
-    <new-todo
+    <new-todo class="new-todo-section"
       :todoModel="todoModel">
     </new-todo>
   </div>
@@ -41,3 +41,15 @@ export default class TodoView extends Vue {
   }
 }
 </script>
+
+<style scoped lang="scss">
+.condition-section {
+  margin-top: 2rem;
+}
+.list-section {
+  margin-top: 1rem;
+}
+.new-todo-section {
+  margin-top: 2rem;
+}
+</style>

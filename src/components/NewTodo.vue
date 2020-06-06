@@ -1,7 +1,7 @@
 <template>
   <div>
-    <form @submit.prevent="onSubmit">
-      <input type="text" placeholder="新しいタスク..."
+    <form class="form-group" @submit.prevent="onSubmit">
+      <input type="text" class="form-control" placeholder="新しいタスク..."
         v-model="newTask"
       >
     </form>
