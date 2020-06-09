@@ -3,7 +3,6 @@
     <table class="table table-sm table-hover">
       <thead class="thead-light">
         <tr>
-          <th class="cell-id">ID</th>
           <th>タスク</th>
           <th class="cell-state">状態</th>
           <th class="cell-remove">-</th>
@@ -11,7 +10,6 @@
       </thead>
       <tbody>
         <tr v-for="todo in todos" :key="todo.id">
-          <td>{{ todo.id }}</td>
           <td>{{ todo.title }}</td>
           <td class="cell-state">
             <a href="#" class="badge badge-pill badge-primary"
@@ -64,9 +62,6 @@ export default class TodoList extends Vue {
 </script>
 
 <style scoped lang="scss">
-table .cell-id {
-  width: 2.5rem;
-}
 table .cell-state {
   text-align: center;
   width: 5rem;
