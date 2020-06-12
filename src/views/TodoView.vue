@@ -1,6 +1,5 @@
 <template>
   <div class="container">
-    <img style="display: none" alt="screen shot" src="../assets/screenshot.png">
     <h1 class="text-center">Todoリスト</h1>
     <todo-condition class="condition-section"
       :todoModel="todoModel"
