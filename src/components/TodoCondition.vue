@@ -25,7 +25,7 @@ export default class TodoCondition extends Vue {
   }
 
   get todoCount () {
-    return this.todoModel.findList(this.condition).length
+    return this.todoModel.todos.length
   }
 }
 </script>

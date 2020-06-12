@@ -1,10 +1,12 @@
 
-import Storage from '@/logics/Storage'
 import { Todo } from '@/types/Todo'
+import firebase, { firestore } from 'firebase/app'
+import 'firebase/firestore'
+
+type TodoSnapshot = firebase.firestore.QuerySnapshot<firebase.firestore.DocumentData>
 
 export default class TodoModel {
-  private storage: Storage
-  private todos: Todo[]
+  public todos: Todo[]
 
   options = [
     { state: -1, label: '全て' },
@@ -12,50 +14,97 @@ export default class TodoModel {
     { state: 1, label: '完了' }
   ]
 
-  constructor (storage: Storage) {
-    this.storage = storage
-    this.todos = this.storage.fetch()
+  constructor () {
+    this.todos = []
   }
 
-  findList (condition: number): Todo[] {
-    // condition = -1は全てのTODOが対象
-    return this.todos.filter(todo => {
-      return (condition === -1) ? true : todo.state === condition
-    })
-  }
-
-  add (title: string): void {
-    const trimedTitle = title.trim()
-    if (trimedTitle === '') {
-      return
+  async fetch (condition: number): Promise<void> {
+    let snapShot: TodoSnapshot
+    if (condition === -1) {
+      snapShot = await this.findAll()
+    } else {
+      snapShot = await this.findByCondition(condition)
     }
 
-    this.todos.push({
-      id: this.storage.nextId++,
-      title: trimedTitle,
-      state: 0
+    const newTodos: Todo[] = []
+    snapShot.docs.forEach(doc => {
+      const todo: Todo = doc.data() as Todo
+      todo.id = doc.id
+      // console.log('id:' + todo.id + 'title:' + todo.title + ' - state:' + todo.state)
+      newTodos.push(todo)
     })
-
-    this.storage.save(this.todos)
+    this.todos = newTodos
   }
 
-  changeState (todo: Todo): void {
+  async add (title: string): Promise<number | void> {
+    const trimedTitle = title.trim()
+    if (trimedTitle === '') {
+      return setTimeout(() => {
+        return Promise.resolve()
+      }, 0)
+    }
+
+    const newTodo = {
+      title: title,
+      done: false
+    }
+
+    this.collection()
+      .add(newTodo)
+      .then(docRef => {
+        console.log('Document written with ID: ', docRef.id)
+        this.todos.push({
+          id: docRef.id,
+          title: newTodo.title,
+          done: newTodo.done
+        })
+      })
+      .catch(error => {
+        console.error('Error adding document: ', error)
+      })
+  }
+
+  async changeState (todo: Todo): Promise<void> {
     const index = this.todos.indexOf(todo)
     if (index === -1) {
       throw new Error('TodoModel:changeState todo not found.')
     }
+    this.todos[index].done = !this.todos[index].done
 
-    this.todos[index].state = (this.todos[index].state === 0) ? 1 : 0
-    this.storage.save(this.todos)
+    this.collection()
+      .doc(todo.id)
+      .update(this.todos[index])
   }
 
-  remove (todo: Todo): void {
+  async remove (todo: Todo): Promise<void> {
+    await this.collection()
+      .doc(todo.id)
+      .delete()
+
     const index = this.todos.indexOf(todo)
     if (index === -1) {
       throw new Error('TodoModel:remove todo not found.')
     }
-
     this.todos.splice(index, 1)
-    this.storage.save(this.todos)
+  }
+
+  private collection () {
+    return firebase.firestore().collection('todos')
+  }
+
+  private findAll (): Promise<TodoSnapshot> {
+    return this.collection()
+      .get()
+  }
+
+  private findByCondition (condition: number): Promise<TodoSnapshot> {
+    if (condition !== 0 && condition !== 1) {
+      throw new Error('Bad argument[condition]')
+    }
+
+    const done = (condition === 1)
+    return this.collection()
+      .where('done', '==', done)
+      .get()
   }
 }

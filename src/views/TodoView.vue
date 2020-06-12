@@ -19,7 +19,6 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
-import Storage from '@/logics/Storage'
 import TodoModel from '@/models/TodoModel'
 import TodoCondition from '@/components/TodoCondition.vue'
 import TodoList from '@/components/TodoList.vue'
@@ -33,11 +32,16 @@ import NewTodo from '@/components/NewTodo.vue'
   }
 })
 export default class TodoView extends Vue {
-  todoModel: TodoModel = new TodoModel(new Storage())
+  todoModel: TodoModel = new TodoModel()
   condition = -1
+
+  created () {
+    this.todoModel.fetch(this.condition)
+  }
 
   onChangeState (value: number) {
     this.condition = value
+    this.todoModel.fetch(this.condition)
   }
 }
 </script>

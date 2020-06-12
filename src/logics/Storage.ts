@@ -15,7 +15,7 @@ export default class Storage {
       localStorage.getItem(this.key) || '[]'
     )
     todos.forEach((todo, index) => {
-      todo.id = index
+      todo.id = index.toString()
     })
 
     this.nextId = todos.length
