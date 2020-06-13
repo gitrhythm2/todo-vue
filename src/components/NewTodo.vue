@@ -19,8 +19,12 @@ export default class NewTodo extends Vue {
   @Prop({ type: Object, required: true })
   todoModel!: TodoModel
 
-  onSubmit () {
-    this.todoModel.add(this.newTask)
+  @Prop({ type: Number, required: true })
+  condition!: number
+
+  async onSubmit () {
+    await this.todoModel.add(this.newTask)
+    this.todoModel.fetch(this.condition)
     this.newTask = ''
   }
 }

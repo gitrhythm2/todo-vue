@@ -52,15 +52,6 @@ export default class TodoModel {
 
     this.collection()
       .add(newTodo)
-      .then(docRef => {
-        console.log('Document written with ID: ', docRef.id)
-        this.todos.unshift({
-          id: docRef.id,
-          title: newTodo.title,
-          done: newTodo.done,
-          createdAt: newTodo.createdAt
-        })
-      })
       .catch(error => {
         console.error('Error adding document: ', error)
       })

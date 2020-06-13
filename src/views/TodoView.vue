@@ -12,7 +12,8 @@
     </todo-list>
 
     <new-todo class="new-todo-section"
-      :todoModel="todoModel">
+      :todoModel="todoModel"
+      :condition="condition">
     </new-todo>
   </div>
 </template>
