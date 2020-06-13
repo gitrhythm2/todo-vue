@@ -46,17 +46,19 @@ export default class TodoModel {
 
     const newTodo = {
       title: title,
-      done: false
+      done: false,
+      createdAt: firebase.firestore.FieldValue.serverTimestamp()
     }
 
     this.collection()
       .add(newTodo)
       .then(docRef => {
         console.log('Document written with ID: ', docRef.id)
-        this.todos.push({
+        this.todos.unshift({
           id: docRef.id,
           title: newTodo.title,
-          done: newTodo.done
+          done: newTodo.done,
+          createdAt: newTodo.createdAt
         })
       })
       .catch(error => {
@@ -94,6 +96,7 @@ export default class TodoModel {
 
   private findAll (): Promise<TodoSnapshot> {
     return this.collection()
+      .orderBy('createdAt', 'desc')
       .get()
   }
 
@@ -104,6 +107,7 @@ export default class TodoModel {
 
     const done = (condition === 1)
     return this.collection()
+      .orderBy('createdAt', 'desc')
       .where('done', '==', done)
       .get()
   }
