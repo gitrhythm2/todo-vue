@@ -14,7 +14,7 @@
           <td class="cell-state">
             <a href="#" class="badge badge-pill badge-primary"
               @click="onChangeState(todo)">
-              {{ statusLabel(todo.done) }}
+              {{ labels[Number(todo.done)].label }}
             </a>
           </td>
           <td class="cell-remove">
@@ -41,12 +41,14 @@ export default class TodoList extends Vue {
   @Prop({ type: Number, required: true })
   condition!: number
 
-  get todos (): Todo[] {
-    return this.todoModel.todos
+  get labels () {
+    return this.todoModel.options.filter(opt => {
+      return opt.state >= 0
+    })
   }
 
-  statusLabel (done: boolean) {
-    return done ? '完了' : '未完了'
+  get todos (): Todo[] {
+    return this.todoModel.todos
   }
 
   onChangeState (todo: Todo): void {
