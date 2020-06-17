@@ -42,7 +42,7 @@ export default class TodoList extends Vue {
   condition!: number
 
   get labels () {
-    return this.todoModel.options.filter(opt => {
+    return TodoModel.Options.filter(opt => {
       return opt.state >= 0
     })
   }

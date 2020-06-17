@@ -7,15 +7,14 @@ import TodoRepository from '@/repositories/TodoRepository'
 type TodoSnapshot = firebase.firestore.QuerySnapshot<firebase.firestore.DocumentData>
 
 export default class TodoModel {
-  private todoRepo = new TodoRepository()
-
-  public todos: Todo[]
-
-  options = [
+  static readonly Options = [
     { state: -1, label: '全て' },
     { state: 0, label: '未完了' },
     { state: 1, label: '完了' }
   ]
+
+  private todoRepo = new TodoRepository()
+  todos: Todo[]
 
   constructor () {
     this.todos = []

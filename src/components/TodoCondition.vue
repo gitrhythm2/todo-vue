@@ -1,6 +1,6 @@
 <template>
   <div>
-    <label v-for="opt in todoModel.options" :key="opt.state">
+    <label v-for="opt in options" :key="opt.state">
       <input type="radio" v-model="condition" :value="opt.state">
       {{ opt.label}}
     </label>
@@ -22,6 +22,10 @@ export default class TodoCondition extends Vue {
   @Watch('condition')
   conditionChange (newValue: number) {
     this.$emit('change', newValue)
+  }
+
+  get options () {
+    return TodoModel.Options
   }
 
   get todoCount () {
