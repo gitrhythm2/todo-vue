@@ -55,7 +55,7 @@ export default class TodoRepository {
 
   private findAll (): Promise<TodoSnapshot> {
     return this.collection()
-      .orderBy('createdAt', 'desc')
+      .orderBy('createdAt')
       .get()
   }
 
@@ -66,8 +66,8 @@ export default class TodoRepository {
 
     const done = (condition === 1)
     return this.collection()
-      .orderBy('createdAt', 'desc')
       .where('done', '==', done)
+      .orderBy('createdAt')
       .get()
   }
 }

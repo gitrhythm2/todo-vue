@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container" style="margin-left: 0.5rem;">
     <label v-for="opt in options" :key="opt.state">
       <input type="radio" v-model="condition" :value="opt.state">
       {{ opt.label}}

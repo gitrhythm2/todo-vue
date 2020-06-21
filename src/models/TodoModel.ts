@@ -13,6 +13,7 @@ export default class TodoModel {
     { state: 1, label: '完了' }
   ]
 
+  private condition = -1
   private todoRepo = new TodoRepository()
   todos: Todo[]
 
@@ -21,7 +22,8 @@ export default class TodoModel {
   }
 
   async fetch (condition: number): Promise<void> {
-    this.todos = await this.todoRepo.fetch(condition)
+    this.condition = condition
+    this.todos = await this.todoRepo.fetch(this.condition)
   }
 
   async add (title: string): Promise<number | void> {
@@ -49,6 +51,7 @@ export default class TodoModel {
     this.todos[index].done = !this.todos[index].done
 
     await this.todoRepo.update(todo)
+    this.todos = await this.todoRepo.fetch(this.condition)
   }
 
   async remove (todo: Todo): Promise<void> {
@@ -58,6 +61,7 @@ export default class TodoModel {
     if (index === -1) {
       throw new Error('TodoModel:remove todo not found.')
     }
-    this.todos.splice(index, 1)
+
+    this.todos = await this.todoRepo.fetch(this.condition)
   }
 }

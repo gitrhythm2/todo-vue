@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container">
     <form class="form-group" @submit.prevent="onSubmit">
       <input type="text" class="form-control" placeholder="新しいタスク..."
         v-model="newTask"
@@ -29,3 +29,11 @@ export default class NewTodo extends Vue {
   }
 }
 </script>
+
+<style scoped lang="scss">
+input[type="text"] {
+  padding-left: 0.5rem;
+  border: none;
+  border-bottom: 1px solid rgba(0,0,0,.125);
+}
+</style>
